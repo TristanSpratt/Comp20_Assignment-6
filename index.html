@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Amicable Numbers
+	</title>
+
+	<link rel="stylesheet" type="text/css" href="myStyle.css">
+</head>
+<body>
+
+	<h1>
+		Amicable Numbers
+	</h1>
+
+
+	<div id="form">
+		<form>
+
+			<div id="inputBoxes">
+				<h3>
+					Please enter your 2 values below:
+				</h3>
+
+				<label class="inputText"> Value 1: </label>
+				<input type="text" name="value1" id="value1" style="margin-right: 1.8%">
+
+				<label class="inputText"> Value 2: </label>
+				<input type="text" name="value2" id="value2" style="margin-right: 1.8%">
+			</div>
+
+
+			<div id="submitBox">
+				<button id="submitButton" onclick="testIfAmicable(); return false;"> Test Amicability </button>
+			</div>
+
+		</form>
+	</div>
+
+	<div id="resultBox">
+		<h3>
+			Your Results:
+		</h3>
+		<div id="results">
+
+		</div>
+	</div>
+
+
+	<script language="javascript">
+
+		function isAFactor(x, y) {
+			if (y % x == 0) {
+				return true;
+			}
+			return false;
+		}
+
+		function factorFinder(x) {
+
+			var factorArray = [];
+			for (i = 0; i < x; i++) {
+				if (isAFactor(i, x)) {
+					factorArray.push(i);
+				}
+			}
+			return factorArray;
+		}
+
+		function factorSum(factorArray) {
+			var sum = 0;
+			for (i = 0; i < factorArray.length; i++) {
+				sum += factorArray[i];
+			}
+			return sum;
+		}
+
+
+		function testIfAmicable() {
+
+			var firstValue = document.getElementById("value1").value;
+			var secondValue = document.getElementById("value2").value;
+
+			var firstValueFactors = factorFinder(firstValue);
+			var secondValueFactors = factorFinder(secondValue);
+
+			var firstValueSum = factorSum(firstValueFactors);
+			var secondValueSum = factorSum(secondValueFactors);
+
+			var message1 = "The numbers: " + firstValue + " and  " + secondValue + " are amicable."
+			var message2 = "The numbers: " + firstValue + " and  " + secondValue + " are not amicable."
+
+
+			if (firstValueSum == secondValue && secondValueSum == firstValue) {
+				document.getElementById("results").innerHTML = message1;
+			}
+			else {
+				document.getElementById("results").innerHTML = message2;
+			}
+
+			var firstFactors = firstValueFactors.join(', ');
+			var secondFactors = secondValueFactors.join(', ');
+
+			alert("The factors of " + firstValue + " are: " + firstFactors);
+			alert("The factors of " + secondValue + " are: " + secondFactors);
+
+		}
+
+	</script>
+
+</body>
+</html>
